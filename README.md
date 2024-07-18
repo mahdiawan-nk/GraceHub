@@ -38,7 +38,7 @@ GraceHub adalah sistem Pusat informasi dan manajemen gereja yang mempermudah pen
 1. Isi formulir pengaturan database dengan informasi berikut:
    - **DB Hostname**: `localhost` (atau hostname database server Anda)
    - **DB Username**: Username database Anda (misalnya, `root`)
-   - **DB Password**: Password database Anda
+   - **DB Password**: Password database Anda boleh dikosongkan
    - **DB Name**: Nama database yang akan digunakan
 
 2. Klik tombol `Next` untuk melanjutkan ke langkah berikutnya.
