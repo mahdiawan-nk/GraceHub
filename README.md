@@ -11,58 +11,68 @@ GraceHub adalah sistem Pusat informasi dan manajemen gereja yang mempermudah pen
 
 ![Back End](backend.png)
 
-## Instalasi
-- download zip <a href="https://github.com/rahmathidayat9/laraschool/archive/master.zip">disini</a> 
-- atau clone : git clone https://github.com/mahdiawan-nk/SIADAT.git
+## Requirments
+- PHP 7.3
 
-## Setup
-- buka direktori project di terminal anda.
-- ketikan command : cp .env.example .env (copy paste file .env.example)
-- buat database 
+## Setup 
 
-Lalu ketik command dibawah ini
-- composer install
-- php artisan optimize:clear 
-- php artisan key:generate (generate app key)
-- php artisan migrate (migrasi database)
-- php artisan db:seed 
-- php artisan storage:link
-- php artisan serve
+### Langkah 1: Setup Aplikasi
+1. **Unduh dan Ekstrak Aplikasi**:
+    - download zip <a href="https://github.com/mahdiawan-nk/GraceHub/archive/refs/heads/main.zip">disini</a> 
+    - atau clone : git clone https://github.com/mahdiawan-nk/GraceHub.git
+    - Ekstrak file zip yang telah diunduh.
+    - Pindahkan folder hasil ekstraksi ke dalam direktori `htdocs` di dalam folder XAMPP. Misalnya, `C:\xampp\htdocs\graceHub`.
 
-## Login
-- link panel admin tambahkan /panel-admin pada url contoh http://127.0.0.1/panel-admin
-- Email : admin
-- Password : 1234567
+2. **Akses Halaman Instalasi**:
+   - Buka browser dan akses `http://localhost/graceHub/install` (untuk XAMPP).
+
+### Langkah 2: Pengaturan Aplikasi
+1. Isi formulir pengaturan aplikasi dengan informasi berikut:
+   - **Nama Aplikasi**: Nama aplikasi Anda
+   - **Penulis**: Nama penulis aplikasi
+   - **Deskripsi Aplikasi**: Deskripsi singkat tentang aplikasi
+
+2. Klik tombol `Next` untuk melanjutkan ke langkah berikutnya.
+
+### Langkah 3: Pengaturan Database
+1. Isi formulir pengaturan database dengan informasi berikut:
+   - **DB Hostname**: `localhost` (atau hostname database server Anda)
+   - **DB Username**: Username database Anda (misalnya, `root`)
+   - **DB Password**: Password database Anda
+   - **DB Name**: Nama database yang akan digunakan
+
+2. Klik tombol `Next` untuk melanjutkan ke langkah berikutnya.
+
+### Langkah 4: Pengaturan Akun Administrator
+1. Isi formulir pengaturan akun administrator dengan informasi berikut:
+   - **Nama Lengkap**: Nama lengkap administrator
+   - **Username**: Username administrator
+   - **Email**: Email administrator
+   - **Password**: Password untuk administrator
+
+2. Klik tombol `Install` untuk menyelesaikan proses instalasi.
+
+### Langkah 5: Selesai
+1. Setelah proses instalasi selesai, Anda akan diarahkan ke halaman login.
+2. Masukkan username dan password administrator yang telah Anda buat untuk masuk ke aplikasi.
+
 
 ## Fitur
 # Front / Depan
-- Home (Halaman home,menampilkan berita,pengumuman terbaru)
-- Profile (Visi Misi dan Sejarah)
-- Informasi (Datouk Ninik Mamak dan Kenegerian)
-- Adat & Istiadat (Adat Istiadat, Seni Tari, Seni Musik, Kuliner Khas, dan peninggalan)
-- Berita (menampilkan seluruh berita yang ada)
-- Kontak (menampilkan informasi kontak website)  
+- Home (Halaman home,menampilkan jumlah gereja, card gereja)
+- Data Gereja : menampilkan informasi data gereja yang ada
+- Informasi Gereja : menampilkan informasi kegiatan dan jadwal pada gereja
 
 # admin
-- Autentikasi (menggunakan Auth UI)
+- Autentikasi
 - Halaman Dashboard
 - Manage User (CRUD)
-- Manage Berita (CRUD dan Persetujuan Publish Berita)
-- Manage Profil Visi Misi (CRU)
-- Manage Profil Sejarah (CRU)
-- Manage Informasi Datouk Ninik Mamak (CRUD dan Persetujuan Pengajuan Ninik Mamak)
-- Manage Informasi Kenegerian (CRUD)
-- Manage Adat Istiadat (CRUD dan Persestujuan Adat Istiadat)
-- Manage Seni Tari (CRUD)
-- Manage Seni Musik (CRUD)
-- Manage Kuliner Khas (CRUD)
-- Manage Peninggalan (CRUD)
-- Manage Kontak (CRU)
-- Perpesanan (Kirim Pesan, Balas Pesan, trash, inbox, Send, Stars, kirim dengan attachment)
+- Manage Data Gereja (CRUD)
+- Manage Inforamsi Gereja (CRUD)
+
 
 # Operator
-- Autentikasi (menggunakan Auth UI)
+- Autentikas
 - Halaman Dashboard
-- Manage Berita (CRUD)
-- Manage Informasi Datouk Ninik Mamak (CRUD dan Persetujuan Pengajuan Ninik Mamak)
-- Perpesanan (Kirim Pesan, Balas Pesan, trash, inbox, Send, Stars, kirim dengan attachment)
+- Manage Data Gereja (RU)
+- Manage Inforamsi Gereja (CRUD)
