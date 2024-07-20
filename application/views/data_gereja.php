@@ -127,13 +127,13 @@
                 </div>
                 <div class="portfolio-description" data-aos="fade-left" data-aos-delay="500">
                     <h2>Visi</h2>
-                    <p>
+                    <p class="text-break">
                        ${data.visi}
                     </p>
                 </div>
                 <div class="portfolio-description" data-aos="fade-left" data-aos-delay="600">
                     <h2>Misi</h2>
-                    <p>
+                    <p class="text-break">
                         ${data.misi}
                     </p>
                 </div>
