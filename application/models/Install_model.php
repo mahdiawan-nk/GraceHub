@@ -132,6 +132,12 @@ class Install_model extends CI_Model
                 'null' => FALSE,
                 'default' => 0,
             ),
+            'foto' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => FALSE,
+                'collate' => 'utf8mb4_general_ci',
+            ),
             'created_at' => array(
                 'type' => 'TIMESTAMP',
                 'null' => TRUE,
