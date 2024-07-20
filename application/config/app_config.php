@@ -11,7 +11,7 @@
                 |
                 */
 
-                $config['app_name'] = 'Sistem Informasi Gereja';
+                $config['app_name'] = 'GraceHUB';
                 $config['app_version'] = '1.0.0';
                 $config['app_author'] = 'Mahdi';
                 $config['app_description'] = '';

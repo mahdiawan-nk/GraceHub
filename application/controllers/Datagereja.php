@@ -40,6 +40,10 @@ class Datagereja extends CI_Controller
     {
         $data['title'] = "Data Gereja";  // Setting the page title
         $data['subtitle'] = "All Dashboard";  // Setting the page subtitle
+        if(detailUser()->role == 2){
+            $data['kategori_gallery'] =$this->db->get_where('data_kategory_gallery',['user_id'=>detailUser()->id])->result();
+            
+        }
         $data['pages'] = '/backend/data-gereja/' . $this->pagesUser;  // Setting the view page based on user role
         view_output($this->baseLayout, $data);  // Loading the base layout view with the $data array
     }
@@ -54,6 +58,9 @@ class Datagereja extends CI_Controller
     public function list()
     {
         $data = $this->datagereja->getAll();  // Retrieving all data
+        foreach ($data as $key => $item) {
+            $item->thumbnail = $item->foto ? base_url('assets/uploads/' . $item->foto) : base_url('assets/admin/static-file/no-images.jpg');
+        }
         $response = array(
             'status' => 'success',
             'message' => 'User found',
@@ -73,9 +80,12 @@ class Datagereja extends CI_Controller
     public function show($id)
     {
         $data = $this->datagereja->getSingle($id);  // Retrieving data for a specific ID
+        if ($data) {
+            $data->thumbnail = $data->foto ? base_url('assets/uploads/' . $data->foto) : base_url('assets/admin/static-file/upload-image.jpg');
+        }
         $response = array(
             'status' => 'success',
-            'message' => 'User found',
+            'message' => $data ? 'Data found' : 'Data not found',
             'data' => $data
         );
         view_output($this->baseLayout, $response, true);  // Loading the base layout view with the response data
@@ -107,12 +117,34 @@ class Datagereja extends CI_Controller
         } else {
             $dataPost = (object)$this->input->post();  // Retrieving the input data
             $dataPost->id_user = detailUser()->id;  // Setting the user ID
-            $this->datagereja->insert($dataPost);  // Inserting the data into the database
-            $response = array(
-                'status' => 'success',
-                'message' => 'Data inserted successfully',
-                'data' => $dataPost
-            );
+            $config['upload_path']          = './assets/uploads/';
+            $config['allowed_types']        = 'jpg|png|jpeg';
+            $config['max_width']            = 7680;
+            $config['max_height']           = 4320;
+            $config['min_width']            = 854;
+            $config['min_height']           = 480;
+            $config['encrypt_name']         = TRUE;
+
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                $uploadData = $this->upload->data();
+                $dataPost->foto = $uploadData['file_name'];
+                $this->datagereja->insert($dataPost);
+                $response = array(
+                    'status' => 'success',
+                    'message' => 'Data inserted successfully',
+                    'data' => $dataPost
+                );
+            } else {
+                $response = array(
+                    'status' => 'error',
+                    'message' => $this->upload->display_errors()
+                );
+            }
+            // Inserting the data into the database
+
         }
         view_output('', $response, true);  // Loading the view with the response data
     }
@@ -130,9 +162,34 @@ class Datagereja extends CI_Controller
         $dataPost = $this->input->post();  // Retrieving the input data
         $dataPost['updated_at'] = date('Y-m-d H:i:s');  // Setting the updated_at timestamp
 
-        $updateResult = $this->datagereja->update($id, $dataPost);  // Updating the data in the database
+        $config['upload_path']          = './assets/uploads/';
+        $config['allowed_types']        = 'jpg|png|jpeg';
+        $config['max_width']            = 7680;
+        $config['max_height']           = 4320;
+        $config['min_width']            = 854;
+        $config['min_height']           = 480;
+        $config['encrypt_name']         = TRUE;
 
-        if ($updateResult) {  // Checking if the update was successful
+
+        $this->load->library('upload', $config);
+
+        $existingData = $this->datagereja->getSingle($id);
+
+        if ($this->upload->do_upload('foto')) {
+            $uploadData = $this->upload->data();
+            $dataPost['foto'] = $uploadData['file_name'];
+            // Delete the old file if it exists
+            if (!empty($existingData->foto) && file_exists($config['upload_path'] . $existingData->foto)) {
+                unlink($config['upload_path'] . $existingData->foto);
+            }
+        } else {
+            $dataPost['foto'] = isset($existingData->foto) ? $existingData->foto : null;
+        }
+
+        // Updating the data in the database
+        $updateResult = $this->datagereja->update($id, $dataPost);
+
+        if (true) {  // Checking if the update was successful
             $response = array(
                 'status' => 'success',
                 'message' => 'Data updated successfully',

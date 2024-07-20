@@ -17,10 +17,10 @@
     <link href="<?= $this->config->item('admin_assets') ?>vertical/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="<?= $this->config->item('admin_assets') ?>vertical/css/theme.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/v/bs4/dt-2.0.8/r-3.0.2/rg-1.5.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/v/bs4/dt-2.1.0/r-3.0.2/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="<?= $this->config->item('admin_assets') ?>vertical/js/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/v/bs4/dt-2.0.8/r-3.0.2/rg-1.5.0/sr-1.4.1/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs4/dt-2.1.0/r-3.0.2/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">

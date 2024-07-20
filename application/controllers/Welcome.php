@@ -50,10 +50,15 @@ class Welcome extends CI_Controller
 		// Fetch limit and offset parameters from the GET request
 		$limit = $this->input->get('limit');
 		$offset = $this->input->get('offset');
-
+		$data = $this->datagereja->get_gereja($limit, $offset);
+		if($data){
+			foreach ($data as $key => $item) {
+				$item->thumbnail = $item->foto ? base_url('assets/uploads/' . $item->foto) : base_url('assets/admin/static-file/no-images.jpg');
+			}
+		}
 		// Prepare the data array with paginated church data and total church count
 		$data = [
-			'data' => $this->datagereja->get_gereja($limit, $offset), // Paginated list of churches
+			'data' => $data, // Paginated list of churches
 			'total' => $this->datagereja->get_total_gereja() // Total count of churches
 		];
 

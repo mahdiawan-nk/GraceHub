@@ -1,10 +1,18 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<style>
+    table.dataTable tbody td {
+        vertical-align: middle;
+    }
+</style>
 <div class="row" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1000">
     <div class="col-sm-12" id="page-create" style="display: none;">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title" id="page-title">Tambah Data Gereja</h4>
                 <form id="form-create">
+                    <img src="<?= $this->config->item('admin_assets') ?>static-file/upload-image.jpg" id="preview-image" class="rounded img-thumbnail shadow-lg mb-2" alt="..." style="width:100%;height:720px;object-fit:cover">
+                    <button class="btn btn-info waves-effect waves-light d-block mx-auto" id="upload-image">Upload Gambar</button>
+                    <input type="file" id="file-input" name="file" accept="image/*" class="form-control" hidden>
                     <div class="form-group">
                         <label for="nama">Nama Gereja</label>
                         <input type="text" class="form-control" id="nama" aria-describedby="emailHelp" placeholder="Enter Nama Gereja">
@@ -54,6 +62,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
+                                <th>Foto</th>
                                 <th>Nama Gereja</th>
                                 <th>Aliran Gereja</th>
                                 <th>Pimpinan Gereja</th>
@@ -85,6 +94,7 @@
     var modeForm = 'create';
     var uid = null
     let DataGereja = {
+        foto: null,
         nama: '',
         aliran: '',
         pimpinan: '',
@@ -97,7 +107,7 @@
 
     const headers = {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
         }
     }
     const fetchListGereja = async () => {
@@ -107,12 +117,19 @@
             table = new DataTable('#table-data', {
                 processing: true,
                 serverSide: false,
-                responsive: false,
+                responsive: true,
                 data: datas,
                 columns: [{
                         data: null,
                         render: function(data, type, row, meta) {
                             return meta.row + 1;
+                        }
+                    },
+                    {
+                        orderable: false,
+                        data: 'thumbnail',
+                        render: (h) => {
+                            return `<img src="${h}" width="75" height="50">`;
                         }
                     },
                     {
@@ -129,7 +146,10 @@
                     },
                     {
                         orderable: false,
-                        data: 'sejarah'
+                        data: 'sejarah',
+                        render: (h) => {
+                            return truncateText(h, 50)
+                        }
                     },
                     {
                         orderable: false,
@@ -224,7 +244,55 @@
         $('#id_kecamatan').html(data);
     })
 
+    function truncateText(str, maxLength) {
+        if (str.length > maxLength) {
+            return str.substring(0, maxLength) + '...';
+        }
+        return str;
+    }
     $(function() {
+        $('#upload-image').click(function(e) {
+            e.preventDefault();
+            $('#file-input').trigger('click');
+        });
+        $('#file-input').change(function(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.onload = function() {
+                        var width = img.width;
+                        var height = img.height;
+                        var aspectRatio = width / height;
+                        var minWidth = 854;
+                        var minHeight = 480;
+                        var maxWidth = 7680;
+                        var maxHeight = 4320;
+
+                        if (width < minWidth || height < minHeight) {
+                            Swal.fire({
+                                icon: "error",
+                                title: 'Dimensions are too small.',
+                                html: " Minimum width is 426px and minimum height is 240px.",
+                            });
+                            $('#file-input').val('');
+                        } else if (width > maxWidth || height > maxHeight) {
+                            Swal.fire({
+                                icon: "error",
+                                title: 'Dimensions are too large',
+                                html: "Dimensions are too large. Maximum width is 7680px and maximum height is 4320px.",
+                            });
+                            $('#file-input').val('');
+                        } else {
+                            $('#preview-image').attr('src', e.target.result);
+                        }
+                    }
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
         $('#sejarah,#visi,#misi').summernote({
             tabsize: 2,
             height: 100,
@@ -311,6 +379,7 @@
             fetchGerejaById(dataTable).then(data => {
                 modeForm = 'update'
                 $('#id').val(data.data.id)
+                $('#preview-image').attr('src', data.data.thumbnail)
                 $('#nama').val(data.data.nama)
                 $('#aliran').val(data.data.aliran)
                 $('#pimpinan').val(data.data.pimpinan)
@@ -328,6 +397,7 @@
 
         $('#form-create').submit(async function(e) {
             e.preventDefault();
+            DataGereja.foto = $('#file-input')[0].files[0];
             DataGereja.nama = $('#nama').val()
             DataGereja.aliran = $('#aliran').val()
             DataGereja.pimpinan = $('#pimpinan').val()
@@ -340,12 +410,20 @@
             try {
                 let response;
                 if (modeForm === 'create') {
+                    if (!DataGereja.foto) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please select a photo before submitting.',
+                            confirmButtonColor: '#28a745'
+                        });
+                        return;
+                    }
                     response = await insertDataGereja(DataGereja);
                 } else if (modeForm === 'update') {
+
                     response = await updateDataGereja(uid, DataGereja);
                 }
-
-
                 if (response.status == 'error') {
                     Swal.fire({
                         icon: "error",
