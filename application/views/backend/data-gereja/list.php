@@ -42,6 +42,10 @@
                         <input type="text" class="form-control" id="lokasi" aria-describedby="emailHelp" placeholder="Enter lokasi Gereja">
                     </div>
                     <div class="form-group">
+                        <label for="lokasi">Jumlah Jemaat</label>
+                        <input type="text" class="form-control" id="jumlah-jemaat" aria-describedby="emailHelp" placeholder="Enter Jumlah Jemaat">
+                    </div>
+                    <div class="form-group">
                         <label for="id_kecamatan">Kecamatan</label>
                         <select name="id_kecamatan" id="id_kecamatan" class="form-control"></select>
                     </div>
@@ -102,6 +106,7 @@
         visi: '',
         misi: '',
         lokasi: '',
+        jumlah_jemaat: '',
         id_kecamatan: '',
     }
 
@@ -158,7 +163,7 @@
                             misi: "misi"
                         },
                         render: (h) => {
-                            return h.visi + h.misi
+                            return truncateText(h.visi, 50) +'<br>'+ truncateText(h.misi, 50)
                         }
                     },
                     {
@@ -388,6 +393,7 @@
                 $('#misi').summernote('code', data.data.misi)
                 $('#lokasi').val(data.data.lokasi)
                 $('#id_kecamatan').val(data.data.id_kecamatan)
+                $('#jumlah-jemaat').val(data.data.jumlah_jemaat)
                 $('#page-title').text('Ubah Data Gereja')
                 $('#page-create').show()
                 $('#page-list').hide()
@@ -405,6 +411,7 @@
             DataGereja.visi = $('#visi').summernote('code')
             DataGereja.misi = $('#misi').summernote('code')
             DataGereja.lokasi = $('#lokasi').val()
+            DataGereja.jumlah_jemaat = $('#jumlah-jemaat').val()
             DataGereja.id_kecamatan = $('#id_kecamatan').val()
 
             try {

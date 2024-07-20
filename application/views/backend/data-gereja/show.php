@@ -91,6 +91,10 @@
                         <textarea name="misi" id="misi" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
+                        <label for="lokasi">Jumlah Jemaat</label>
+                        <input type="text" class="form-control" id="jumlah-jemaat" aria-describedby="emailHelp" placeholder="Enter Jumlah Jemaat">
+                    </div>
+                    <div class="form-group">
                         <label for="lokasi">Lokasi Gereja</label>
                         <input type="text" class="form-control" id="lokasi" aria-describedby="emailHelp" placeholder="Enter lokasi Gereja">
                     </div>
@@ -140,25 +144,25 @@
                         <div class="portfolio-menu mt-2 mb-4">
                             <ul>
                                 <li class="btn btn-outline-dark active" data-filter="*">All</li>
-                               
+
                             </ul>
                         </div>
                         <div class="portfolio-item row">
-                                <div class="item appcol-lg-3 col-md-4 col-6 col-sm">
-                                    <div class="image-container">
-                                        <a href="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" class="fancylight popup-btn" data-fancybox-group="light">
-                                            <img class="img-fluid" src="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" alt="">
+                            <div class="item appcol-lg-3 col-md-4 col-6 col-sm">
+                                <div class="image-container">
+                                    <a href="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" class="fancylight popup-btn" data-fancybox-group="light">
+                                        <img class="img-fluid" src="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" alt="">
+                                    </a>
+                                    <div class="icon-overlay">
+                                        <a href="#" class="icon edit-icon" title="Edit">
+                                            <i class="fa fa-edit"></i>
                                         </a>
-                                        <div class="icon-overlay">
-                                            <a href="#" class="icon edit-icon" title="Edit">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="icon delete-icon" title="Delete">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
+                                        <a href="#" class="icon delete-icon" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -220,6 +224,7 @@
         sejarah: '',
         visi: '',
         misi: '',
+        jumlah_jemaat: '',
         lokasi: '',
     }
     let datakategori = {
@@ -316,6 +321,7 @@
         $('#sejarah').summernote('code', sejarah)
         $('#visi').summernote('code', visi)
         $('#misi').summernote('code', misi)
+        $('#jumlah-jemaat').val(data.data.jumlah_jemaat)
         $('#lokasi').val(lokasi)
 
     }
@@ -405,7 +411,7 @@
             $('#page-create').hide()
             $('#page-show').show()
         })
-    
+
 
         $('#form-create').submit(async function(e) {
             e.preventDefault();
@@ -417,6 +423,7 @@
             DataGereja.visi = $('#visi').summernote('code')
             DataGereja.misi = $('#misi').summernote('code')
             DataGereja.lokasi = $('#lokasi').val()
+            DataGereja.jumlah_jemaat = $('#jumlah-jemaat').val()
 
             try {
                 let response = await updateDataGereja(idGerejaUser);
@@ -460,7 +467,7 @@
         });
     });
 
-    function editKategori(id,name){
+    function editKategori(id, name) {
         $('#nama-kategori').val(name)
     }
 </script>

@@ -103,6 +103,7 @@ class Datagereja extends CI_Controller
         $this->form_validation->set_rules('sejarah', 'Sejarah Gereja', 'required');
         $this->form_validation->set_rules('visi', 'Visi', 'required');
         $this->form_validation->set_rules('misi', 'Misi', 'required');
+        $this->form_validation->set_rules('jumlah_jemaat', 'Jumlah Jemaat', 'required');
         $this->form_validation->set_rules('lokasi', 'Lokasi', 'required');
 
         if ($this->form_validation->run() == FALSE) {  // Checking if validation failed
