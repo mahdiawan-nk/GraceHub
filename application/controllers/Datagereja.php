@@ -40,10 +40,6 @@ class Datagereja extends CI_Controller
     {
         $data['title'] = "Data Gereja";  // Setting the page title
         $data['subtitle'] = "All Dashboard";  // Setting the page subtitle
-        if(detailUser()->role == 2){
-            $data['kategori_gallery'] =$this->db->get_where('data_kategory_gallery',['user_id'=>detailUser()->id])->result();
-            
-        }
         $data['pages'] = '/backend/data-gereja/' . $this->pagesUser;  // Setting the view page based on user role
         view_output($this->baseLayout, $data);  // Loading the base layout view with the $data array
     }

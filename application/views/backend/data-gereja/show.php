@@ -140,14 +140,11 @@
                         <div class="portfolio-menu mt-2 mb-4">
                             <ul>
                                 <li class="btn btn-outline-dark active" data-filter="*">All</li>
-                                <?php foreach ($kategori_gallery as $item) : ?>
-                                    <li class="btn btn-outline-dark" data-filter=".app-<?= $item->id ?>"><?= $item->kategori ?></li>
-                                <?php endforeach; ?>
+                               
                             </ul>
                         </div>
                         <div class="portfolio-item row">
-                            <?php foreach ($kategori_gallery as $item) : ?>
-                                <div class="item app-<?= $item->id ?> col-lg-3 col-md-4 col-6 col-sm">
+                                <div class="item appcol-lg-3 col-md-4 col-6 col-sm">
                                     <div class="image-container">
                                         <a href="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" class="fancylight popup-btn" data-fancybox-group="light">
                                             <img class="img-fluid" src="https://image.freepik.com/free-photo/stylish-young-woman-with-bags-taking-selfie_23-2147962203.jpg" alt="">
@@ -162,7 +159,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -200,16 +196,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($kategori_gallery as $index=>$item) : ?>
-                                        <tr>
-                                            <th scope="row"><?=$index + 1?></th>
-                                            <td><?=$item->kategori?></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-secondary" onclick="editKategori(<?=$item->id?>, '<?=$item->kategori?>')"><i class="fa fa-edit"></i></button>
-                                                <button class="btn btn-sm btn-danger" onclick="deleteKategori(<?=$item->id?>)"><i class="fa fa-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
