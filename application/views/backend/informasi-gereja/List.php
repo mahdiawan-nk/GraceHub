@@ -195,7 +195,7 @@
             if (data.data.length == 0) {
                 Swal.fire({
                     allowOutsideClick: false,
-                    allowEscapeKey  : false,
+                    allowEscapeKey: false,
                     stopKeydownPropagation: false,
                     icon: "error",
                     title: "Oops...",
@@ -227,6 +227,10 @@
     })
 
     $(function() {
+        $("#jadwal").flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
         $('#tata_laksan,#keterangan').summernote({
             tabsize: 2,
             height: 100,
