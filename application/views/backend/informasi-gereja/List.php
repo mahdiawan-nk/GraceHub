@@ -42,7 +42,7 @@
     <div class="col-xl-12" id="page-list">
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-sm btn-primary" id="btn-create">Tambah Informasi Gereja</button>
+                <button class="btn btn-sm btn-primary" id="btn-create" <?= detailUser()->role == 1 ? 'hidden' : '' ?>>Tambah Informasi Gereja</button>
                 <hr>
                 <div class="table-responsive">
                     <table class="table mb-0" id="table-data">
@@ -74,6 +74,7 @@
 </div>
 
 <script>
+    const rolesUser = '<?= detailUser()->role ?>';
     const baseUrl = '<?= base_url('api/infogereja'); ?>';
     const idGerejaUser = '<?= detailUser()->id_gereja ?>'
     var table;
@@ -136,6 +137,7 @@
                     },
                     {
                         orderable: false,
+                        visible: rolesUser == 1 ? false : true,
                         data: 'id',
                         render: (h) => {
                             return `<button type="button" class="btn btn-sm btn-outline-secondary waves-effect waves-light btn-edit"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit</button>

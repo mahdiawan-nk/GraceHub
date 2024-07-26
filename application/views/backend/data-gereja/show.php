@@ -132,7 +132,7 @@
 
                 <div class="tab-content">
                     <div class="tab-pane show active" id="home">
-                        <button class="btn btn-sm btn-primary" id="btn-update">Perbarui Informasi Data Gereja</button>
+                        <!-- <button class="btn btn-sm btn-primary" id="btn-update">Perbarui Informasi Data Gereja</button> -->
                         <hr>
                         <ul class="list-group list-group-flush" id="deskripsi-gereja">
                         </ul>

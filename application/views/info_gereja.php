@@ -5,7 +5,7 @@
         
     </div>
 </div>
-<section id="portfolio-details" class="portfolio-details section">
+<section id="portfolio-details" class="portfolio-details section aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
     <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
             <div class="col-lg-6">
@@ -15,10 +15,10 @@
                 <nav aria-label="Page navigation example" id="pagination">
                     <ul class="pagination justify-content-end">
                         <li class="page-item me-1" id="prev-page">
-                            <button class="page-link" onclick="loadData(currentPage - 1)"><i class="bi bi-caret-left-square-fill"></i></button>
+                            <button class="page-link" onclick="loadData(currentPage - 1)">Previous</button>
                         </li>
                         <li class="page-item" id="next-page">
-                            <a class="page-link" href="#" onclick="loadData(currentPage + 1)"><i class="bi bi-caret-right-square-fill"></i></a>
+                            <a class="page-link" href="#" onclick="loadData(currentPage + 1)">Next</a>
                         </li>
                     </ul>
                 </nav>
@@ -36,6 +36,7 @@
                             <th scope="col">Jadwal</th>
                             <th scope="col">Jenis Ibadah</th>
                             <th scope="col">Tata Laksana</th>
+                            <th scope="col">Keterangan</th>
                             <th scope="col">No Handpone</th>
                         </tr>
                     </thead>
@@ -94,7 +95,10 @@
                         orderable: false,
                         data: 'tata_laksana'
                     },
-
+                    {
+                        orderable: false,
+                        data: 'keterangan'
+                    },
                     {
                         orderable: false,
                         data: 'no_telp',

@@ -1,4 +1,3 @@
-
 <section id="hero" class="about section">
 
 	<div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -25,11 +24,11 @@
 			<div class="card-body">
 				<nav aria-label="Page navigation example" id="pagination">
 					<ul class="pagination justify-content-end">
-						<li class="page-item me-1">
-							<a class="page-link" href="#" onclick="loadData(currentPage - 1)"><i class="bi bi-caret-left-square-fill"></i></a>
+						<li class="page-item me-1" id="prev-page">
+							<a class="page-link" href="#" onclick="loadData(currentPage - 1)">Previous</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link" href="#" onclick="loadData(currentPage + 1)"><i class="bi bi-caret-right-square-fill"></i></a>
+						<li class="page-item" id="next-page">
+							<a class="page-link" href="#" onclick="loadData(currentPage + 1)">Next</a>
 						</li>
 					</ul>
 				</nav>
@@ -52,7 +51,7 @@
 	}
 
 	let currentPage = 1;
-	const limit = 4;
+	const limit = 2;
 	const fetchDataGereja = async (page) => {
 		if (page < 1) return;
 		const offset = (page - 1) * limit;
@@ -109,6 +108,11 @@
 			});
 
 			currentPage = page;
+			let prevBtn = document.getElementById('prev-page');
+            let nextBtn = document.getElementById('next-page');
+
+            currentPage === 1 ? prevBtn.classList.add('disabled') : prevBtn.classList.remove('disabled');
+            currentPage === totalPages ? nextBtn.classList.add('disabled') : nextBtn.classList.remove('disabled');
 		} catch (error) {
 			console.error('Error fetching data', error);
 		}

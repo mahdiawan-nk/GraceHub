@@ -18,10 +18,10 @@
                 <nav aria-label="Page navigation example" id="pagination">
                     <ul class="pagination justify-content-end">
                         <li class="page-item me-1" id="prev-page">
-                            <button class="page-link" onclick="loadData(currentPage - 1)"><i class="bi bi-caret-left-square-fill"></i></button>
+                            <button class="page-link" onclick="loadData(currentPage - 1)">Previous</button>
                         </li>
                         <li class="page-item" id="next-page">
-                            <a class="page-link" href="#" onclick="loadData(currentPage + 1)"><i class="bi bi-caret-right-square-fill"></i></a>
+                            <a class="page-link" href="#" onclick="loadData(currentPage + 1)">Next</i></a>
                         </li>
                     </ul>
                 </nav>
